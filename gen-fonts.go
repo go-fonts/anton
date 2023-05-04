@@ -17,7 +17,6 @@ import (
 	"fmt"
 	"go/format"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -138,12 +137,12 @@ func do(ttfName string, src []byte) error {
 		return fmt.Errorf("could not format source: %w", err)
 	}
 
-	err = ioutil.WriteFile(filepath.Join(pkgName, "data.go"), dst, 0666)
+	err = os.WriteFile(filepath.Join(pkgName, "data.go"), dst, 0666)
 	if err != nil {
 		return fmt.Errorf("could not write package source file: %w", err)
 	}
 
-	err = ioutil.WriteFile(filepath.Join(pkgName, ttfName), src, 0666)
+	err = os.WriteFile(filepath.Join(pkgName, ttfName), src, 0666)
 	if err != nil {
 		return fmt.Errorf("could not write package TTF file: %w", err)
 	}
